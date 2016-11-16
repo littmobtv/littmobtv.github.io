@@ -96,7 +96,7 @@ margin: 10% 1%;
     <!-- REACTIONS -->
 	
   <div class="tc wf shock">
-  <img class="got" src="img/santa.jpg"><br /><img class="emoji" src="emojis/like.png"/><span class="counter"></span></div>
+  <img class="got" src="img/santa.jpg"><br /><img class="emoji" src="emojis/shock.png"/><span class="counter"></span></div>
   
 	<div class="tc wf happy">
 <img class="got" src="img/tg.jpg"><br />
@@ -108,17 +108,17 @@ margin: 10% 1%;
     <script>
     "use strict";
     var access_token = '1255153574506751|WylXF5faYzLs84xL_8MgGPPrXJI'; // PASTE HERE YOUR FACEBOOK ACCESS TOKEN
-    var postID = '208255416283091'; // PASTE HERE YOUR POST ID 
+    var postID = '208268586281774'; // PASTE HERE YOUR POST ID 
     var refreshTime = 5; // Refresh time in seconds
     var defaultCount = 0; // Default count to start with
 
-    var reactions = ['LOVE', 'LIKE'].map(function (e) {
+    var reactions = ['LOVE', 'WOW'].map(function (e) {
         var code = 'reactions_' + e.toLowerCase();
         return 'reactions.type(' + e + ').limit(0).summary(total_count).as(' + code + ')'
     }).join(',');
 
     var	
-    	v1 = $('.likes .counter'),
+    	v1 = $('.shock .counter'),
         v2 = $('.happy .counter');
 
     function refreshCounts() {

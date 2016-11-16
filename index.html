@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Thanksgiving VS Christmas</title>
+	<style>
+        html {
+          box-sizing: border-box;
+          width: 100%;
+          height: 100%;
+          margin:0;
+          padding:0;
+          background: url("img/bk.jpg") no-repeat center fixed; 
+          -webkit-background-size: cover; 
+          background-size: cover; 
+        }
+		*, *:before, *:after {
+		  box-sizing: inherit;
+		}
+		body{
+			margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3)
+		}
+        header { 
+            text-align: center; 
+        }
+        header .logo { 
+            position: relative; 
+            margin:100px auto 20px; 
+            width:250px;
+        }
+        h1 { 
+            text-align: center; 
+            width:100%; 
+            font-size: 50px; 
+            padding: 30px 0; 
+            margin:0; 
+            color:#fff;
+        }
+		#wrap{
+			position: relative;
+			margin: 0px auto;
+			width: 1280px;
+			height: 720px;
+		}
+        .tc { 
+            text-align: center; 
+            font-size: 3rem;
+margin-top:10%;			
+            font-weight: bold; 
+        }
+		.wf img.got{
+		margin-top:30px;
+		width:430px;
+		}
+			@keyframes changewidth {
+  from {
+    width: 40px;
+  }
+
+  to {
+    width: 30px;
+  }
+}
+.counter{
+color:rgba(255,255,255,255);
+
+}
+        .wf img.emoji  {
+            width:34px;
+            display: inline-block;
+            margin-right:20px;
+			animation-duration: 0.3s;
+  animation-name: changewidth;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+        }
+        .wf { 
+         
+float: left;
+width: 48%;
+margin: 10% 1%;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            position: relative; 
+            text-align: center; 
+        }
+	
+	</style>
+</head>
+<body>
+    <!-- REACTIONS -->
+	
+  <div class="tc wf shock">
+  <img class="got" src="img/santa.jpg"><br /><img class="emoji" src="emojis/like.png"/><span class="counter"></span></div>
+  
+	<div class="tc wf happy">
+<img class="got" src="img/tg.jpg"><br />
+	<img class="emoji" src="emojis/love.png"/><span class="counter"></span></div>
+   
+
+    <script src="jquery.min.js"></script>
+    <script src="lodash.min.js"></script>
+    <script>
+    "use strict";
+    var access_token = '1255153574506751|WylXF5faYzLs84xL_8MgGPPrXJI'; // PASTE HERE YOUR FACEBOOK ACCESS TOKEN
+    var postID = '208255416283091'; // PASTE HERE YOUR POST ID 
+    var refreshTime = 5; // Refresh time in seconds
+    var defaultCount = 0; // Default count to start with
+
+    var reactions = ['LOVE', 'LIKE'].map(function (e) {
+        var code = 'reactions_' + e.toLowerCase();
+        return 'reactions.type(' + e + ').limit(0).summary(total_count).as(' + code + ')'
+    }).join(',');
+
+    var	
+    	v1 = $('.likes .counter'),
+        v2 = $('.happy .counter');
+
+    function refreshCounts() {
+        var url = 'https://graph.facebook.com/v2.8/?ids=' + postID + '&fields=' + reactions + '&access_token=' + access_token;
+    	$.getJSON(url, function(res){
+    		v1.text(defaultCount + res[postID].reactions_wow.summary.total_count);
+    		v2.text(defaultCount + res[postID].reactions_love.summary.total_count);
+          
+    	});
+    }
+
+    $(document).ready(function(){
+        setInterval(refreshCounts, refreshTime * 1000);
+        refreshCounts();
+    });
+    </script>
+</body>
+</html>
